@@ -7,15 +7,20 @@
 export const omit = (obj, ...fields) => {
     const result = {}
 
-    for (let key in obj) {
+    for (const key in obj) {
 
-        let count = 0;
-        for(let i = 0; i < fields.length; i++) {
-            if(key === fields[i]) count++;
+        const isOwn = obj.hasOwnProperty(key);
+
+        if(isOwn) {
+            let count = 0;
+            for(let i = 0; i < fields.length; i++) {
+                if(key === fields[i]) count++;
+            }
+    
+            if (count === 0) result[key] = obj[key];
+            count = 0;
         }
 
-        if (count === 0) result[key] = obj[key];
-        count = 0;
     }
 
     return result;

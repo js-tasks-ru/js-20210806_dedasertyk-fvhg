@@ -7,8 +7,8 @@
 export const pick = (obj, ...fields) => {
     const result = {}
 
-    for(let field of fields) {
-        if(field in obj) result[field] = obj[field]
+    for(const field of fields) {
+        if(field in obj && obj.hasOwnProperty(field)) result[field] = obj[field]
     }
 
     return result;
