@@ -8,12 +8,13 @@ export function sortStrings(arr, param = 'asc') {
     
     let innerArr = [...arr];
 
-    if(param === 'asc') {
-        innerArr.sort( (first, second) => first.localeCompare(second, 'RU-en', {caseFirst: 'upper', sensitivity: 'variant'}) );
-    }
-    else if (param === 'desc') {
-        innerArr.sort( (first, second) => -1 * first.localeCompare(second, 'RU-en', {caseFirst: 'lower',  sensitivity: 'variant'}) );
+    const orderBy = {
+        'asc': 1,
+        'desc': -1
     }
 
-    return innerArr;
+    const multiplier = orderBy[param];
+
+    return  innerArr.sort( (first, second) =>  multiplier * first.localeCompare(second, 'RU-en', 
+    {caseFirst: multiplier === 1 ? 'upper' : 'lower', sensitivity: 'variant'}) );
 }

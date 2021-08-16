@@ -5,23 +5,11 @@
  * @returns {object} - returns the new object
  */
 export const omit = (obj, ...fields) => {
-    const result = {}
+    const result = Object.assign({}, obj)
 
-    for (const key in obj) {
-
-        const isOwn = obj.hasOwnProperty(key);
-
-        if(isOwn) {
-            let count = 0;
-            for(let i = 0; i < fields.length; i++) {
-                if(key === fields[i]) count++;
-            }
-    
-            if (count === 0) result[key] = obj[key];
-            count = 0;
-        }
-
-    }
+    for (const field of fields) {
+        if( (field in result && result.hasOwnProperty(field)) ) delete result[field];
+    } 
 
     return result;
 };
