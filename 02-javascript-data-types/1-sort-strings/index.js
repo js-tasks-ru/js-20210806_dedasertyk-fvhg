@@ -5,5 +5,16 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
+    
+    let innerArr = [...arr];
 
+    const orderBy = {
+        'asc': 1,
+        'desc': -1
+    }
+
+    const multiplier = orderBy[param];
+
+    return  innerArr.sort( (first, second) =>  multiplier * first.localeCompare(second, 'RU-en', 
+    {caseFirst: multiplier === 1 ? 'upper' : 'lower', sensitivity: 'variant'}) );
 }
