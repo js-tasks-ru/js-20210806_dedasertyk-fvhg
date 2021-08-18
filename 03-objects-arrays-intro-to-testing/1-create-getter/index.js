@@ -5,4 +5,8 @@
  */
 export function createGetter(path) {
 
+    return obj => path.split('.').reduce((result, key) => {
+        if(!result) return;
+        return result = result[key]
+    }, obj);
 }
