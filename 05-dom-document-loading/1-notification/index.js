@@ -1,5 +1,7 @@
 export default class NotificationMessage {
 
+    static visiableMessage = null;
+
     element = null;
 
     constructor(message = '', {
@@ -33,7 +35,9 @@ export default class NotificationMessage {
     }
 
     show(container = document.body) {
+        if(NotificationMessage.visiableMessage) NotificationMessage.visiableMessage.remove();
 
+        NotificationMessage.visiableMessage = this.element;
         container.append(this.element);
 
         setTimeout(() => {
